@@ -18,3 +18,5 @@ if __name__ == "__main__":
         f.write("hello world!")
 
     log_artifacts("outputs")
+
+    aaa = 1
