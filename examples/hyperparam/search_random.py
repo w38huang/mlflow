@@ -43,6 +43,7 @@ def run(training_data, max_runs, max_p, epochs, metric, seed):
     ):
         def eval(parms):
             lr, momentum = parms
+            mlflow.set_experiment("hyper_param_runs")
             with mlflow.start_run(nested=True) as child_run:
                 p = mlflow.projects.run(
                     run_id=child_run.info.run_id,
@@ -85,6 +86,7 @@ def run(training_data, max_runs, max_p, epochs, metric, seed):
 
     with mlflow.start_run() as run:
         experiment_id = run.info.experiment_id
+        # experiment_id = 6
         _, null_train_loss, null_val_loss, null_test_loss = new_eval(0, experiment_id)((0, 0))
         runs = [(np.random.uniform(1e-5, 1e-1), np.random.uniform(0, 1.0)) for _ in range(max_runs)]
         with ThreadPoolExecutor(max_workers=max_p) as executor:
