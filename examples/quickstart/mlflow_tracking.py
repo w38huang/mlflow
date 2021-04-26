@@ -1,9 +1,11 @@
 import os
 from random import random, randint
 
+import mlflow
 from mlflow import log_metric, log_param, log_artifacts
 
 if __name__ == "__main__":
+    mlflow.set_experiment("mlflow_quickstart")
     print("Running mlflow_tracking.py")
 
     log_param("param1", randint(0, 100))
@@ -19,4 +21,4 @@ if __name__ == "__main__":
 
     log_artifacts("outputs")
 
-    aaa = 1
+
